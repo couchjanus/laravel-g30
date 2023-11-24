@@ -30,4 +30,16 @@ Route::get('/home', 'App\Http\Controllers\HomeController@index');
 Route::get('/about', 'App\Http\Controllers\AboutController');
 
 
+Route::get('/hello/{name}', function () {
+    return "hello world";
+})->where('name', '[A-Za-z]+');
+
+Route::get('/hello/{id?}', function () {
+    return "hello world";
+})->where('id', '[0-9]+');
+
+Route::get('/hello/{string}/{id?}', function () {
+    return "hello world";
+})->where(['id'=>'[0-9]+', 'string'=> '[A-Za-z]+']);
+
 
