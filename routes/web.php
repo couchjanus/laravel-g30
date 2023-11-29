@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('index');
+})->name('home');
+
 Route::get('/hello', function () {
     // return 'Hello world!';
     $title = "laravel";
@@ -25,10 +29,10 @@ Route::get('/hello', function () {
 
 });
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index');
+// Route::get('/home', 'App\Http\Controllers\HomeController@index');
 
 // Route::get('/about', 'App\Http\Controllers\AboutController');
-Route::get('about', App\Http\Controllers\AboutController::class);
+Route::get('about', App\Http\Controllers\AboutController::class)->name('about');
 
 Route::get('/hello/{name}', function () {
     return "hello world";
@@ -46,6 +50,16 @@ Route::get('/hello/{string}/{id?}', function () {
 use App\Http\Controllers\PostController;
 
 Route::controller(PostController::class)->group(function() {
-    Route::get('blog', 'index');
+    Route::get('blog', 'index')->name('blog');
     Route::get('blog/{id}', 'show');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
