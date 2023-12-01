@@ -34,8 +34,11 @@ Route::controller(PostController::class)->group(function() {
     Route::get('blog/{id}', 'show');
 });
 
-
-Route::get('admin', App\Http\Controllers\Admin\DashboardController::class)->name('admin');
+use App\Http\Controllers\Admin\{DashboardController, BrandController};
+Route::prefix('admin')->group(function() {
+    Route::get('', DashboardController::class)->name('admin');
+    Route::resource('brands', BrandController::class);
+});
 
 Route::middleware([
     'auth:sanctum',
