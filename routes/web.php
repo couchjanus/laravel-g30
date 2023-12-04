@@ -34,9 +34,18 @@ Route::controller(PostController::class)->group(function() {
     Route::get('blog/{id}', 'show');
 });
 
+
+
 use App\Http\Controllers\Admin\{DashboardController, BrandController};
 Route::prefix('admin')->group(function() {
     Route::get('', DashboardController::class)->name('admin');
+   
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('brands/trashed', 'trashed')->name('brands.trashed');
+        Route::post('brands/restore/{id}', 'restore')->name('brands.restore');
+        Route::delete('brands/force/{id}', 'force')->name('brands.force');
+    });
+ 
     Route::resource('brands', BrandController::class);
 });
 

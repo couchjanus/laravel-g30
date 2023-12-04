@@ -3,22 +3,17 @@
         <div class="flex justify-between">
             <h2 class="text-3xl text-black pb-6">Brands management</h2>
             <div class="flex">
-                <a href="{{ route('brands.create') }}">
+                <a href="{{ route('brands.index') }}">
                 <x-admin.primary-button>
-                    {{ __('Create New') }}
+                    {{ __('All Brands') }}
                 </x-admin.primary-button>
-                </a>
-                <a href="{{ route('brands.trashed') }}">
-                <x-admin.warning-button>
-                    {{ __('Trashed brands') }}
-                </x-admin.warning-button>
                 </a>
             </div>
         </div>
     </x-slot>
 
     <div class="w-full mt-12">
-        <p class="text-xl pb-3 flex items-center"><i class="fas fa-list mr-3"></i> All Brands</p>
+        <p class="text-xl pb-3 flex items-center"><i class="fas fa-list mr-3"></i> Trashed Brands</p>
         <div class="bg-white overflow-auto">
             @if(count($brands) > 0)
             <table class="min-w-full bg-white">
@@ -35,18 +30,23 @@
                         <td class="w-1/3 text-left py-3 px-4">{{ $brand->id }}</td>
                         <td class="w-1/3 text-left py-3 px-4">{{ $brand->name }}</td>
                         <td class="w-1/3 text-left py-3 px-4">
-                            <div class="inline-flex">
-                            <a href="{{ route('brands.edit', $brand->id) }}">
-                            <x-admin.success-button>
-                                {{ __('Edit') }}
-                            </x-admin.success-button>
-                            </a>
+                             <div class="inline-flex">
+                            <form method="POST" class="inline-form" action="{{ route('brands.restore', $brand->id) }}">
+                            @csrf
+                            
+                            <x-button>
+                                {{ __('Restore') }}
+                            </x-button>
+                            </form>
 
-                            <form method="POST" class="inline-form" action="{{ route('brands.destroy', $brand->id) }}">
+                           
+                            
+
+                            <form method="POST" class="inline-form" action="{{ route('brands.force', $brand->id) }}">
                             @csrf
                             @method('DELETE')
                             <x-admin.danger-button>
-                                {{ __('Delete') }}
+                                {{ __('Force Delete') }}
                             </x-admin.danger-button>
                             </form>
                             </div>
