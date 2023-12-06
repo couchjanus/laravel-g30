@@ -37,6 +37,8 @@ Route::controller(PostController::class)->group(function() {
 
 
 use App\Http\Controllers\Admin\{DashboardController, BrandController};
+use App\Livewire\Admin\Categories\{CategoryList,};
+
 Route::prefix('admin')->group(function() {
     Route::get('', DashboardController::class)->name('admin');
    
@@ -45,7 +47,7 @@ Route::prefix('admin')->group(function() {
         Route::post('brands/restore/{id}', 'restore')->name('brands.restore');
         Route::delete('brands/force/{id}', 'force')->name('brands.force');
     });
- 
+    Route::get('categories', CategoryList::class);
     Route::resource('brands', BrandController::class);
 });
 
