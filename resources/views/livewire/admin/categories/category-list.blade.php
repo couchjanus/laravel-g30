@@ -3,7 +3,7 @@
        <div class="flex justify-between">
            <h1 class="text-3xl text-black pb-6">Categories management</h1>
            <div class="flex">
-               <x-button href="#">Create New category</x-button>
+               <x-button href="{{ route('categories.create') }}">Create New category</x-button>
                <x-button href="#" color="orange">Trashed categories</x-button>
            </div>
        </div>

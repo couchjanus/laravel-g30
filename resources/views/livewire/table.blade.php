@@ -10,6 +10,7 @@
              </div>
            </th>
          @endforeach
+         <th>Actions</th>
        </tr>
     </thead>
     <tbody>
@@ -21,7 +22,15 @@
                     <x-dynamic-component :component="$column->component"  :value="$row[$column->key]" />
                     </div> 
                 </td>
-            @endforeach
+                @endforeach
+                <td>
+                    <div class="flex">
+                        <x-button href="{{ route('categories.edit', $row->id) }}" color="green">Edit</x-button>
+                        <x-button wire:click="deleteCategory({{ $row->id }})" color="red">Delete</x-button>
+                    </div> 
+                </td>
+            
+            
         </tr>
       @endforeach
     </tbody>

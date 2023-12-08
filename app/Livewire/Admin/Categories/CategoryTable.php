@@ -19,9 +19,7 @@ class CategoryTable extends Table
         return [
 
             Column::make('name', 'Name'),
-            // Column::make('status', 'Status'),
             Column::make('status', 'Status')->component('columns.status'),
-            // Column::make('created_at', 'Created At'),
             Column::make('created_at', 'Created At')->component('columns.human-diff'),
         ];
 
