@@ -17,20 +17,20 @@
       @foreach($this->data() as $row)
         <tr class="bg-white border-b hover:bg-gray-50">
             @foreach($this->columns() as $column)
-                <td> 
+                <td>
                     <div class="py-3 px-6 flex items-center cursor-pointer">
                     <x-dynamic-component :component="$column->component"  :value="$row[$column->key]" />
-                    </div> 
+                    </div>
                 </td>
                 @endforeach
                 <td>
                     <div class="flex">
-                        <x-button href="{{ route('categories.edit', $row->id) }}" color="green">Edit</x-button>
-                        <x-button wire:click="deleteCategory({{ $row->id }})" color="red">Delete</x-button>
-                    </div> 
+                        <x-button href="{{ route($this->route_edit, $row->id) }}" color="green">Edit</x-button>
+                        <x-button wire:click="deleteItem({{ $row->id }})" color="red">Delete</x-button>
+                    </div>
                 </td>
-            
-            
+
+
         </tr>
       @endforeach
     </tbody>

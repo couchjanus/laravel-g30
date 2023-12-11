@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Livewire\Admin\Categories;
+namespace App\Livewire\Admin\Products;
 
 use App\Livewire\Column;
 use App\Livewire\Table;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Category;
+use App\Models\Product;
 
-class CategoryTable extends Table
+class ProductTable extends Table
 {
-    public $route_edit = 'categories.edit';
+
+    public $route_edit = 'products.edit';
 
     public function query():Builder
     {
-        return Category::query();
+        return Product::query();
     }
 
     public function deleteItem(int $id)
     {
-        $category = Category::find($id);
-        $category->delete();
+        $product = Product::find($id);
+        $product->delete();
     }
 
     public function columns():array
@@ -32,5 +33,8 @@ class CategoryTable extends Table
         ];
 
     }
-
+    // public function render()
+    // {
+    //     return view('livewire.admin.products.product-table');
+    // }
 }

@@ -38,10 +38,11 @@ Route::controller(PostController::class)->group(function() {
 
 use App\Http\Controllers\Admin\{DashboardController, BrandController};
 use App\Livewire\Admin\Categories\{CategoryList, CreateCategory, EditCategory};
+use App\Livewire\Admin\Products\{ProductList, CreateProduct, UpdateProduct};
 
 Route::prefix('admin')->group(function() {
     Route::get('', DashboardController::class)->name('admin');
-   
+
     Route::controller(BrandController::class)->group(function () {
         Route::get('brands/trashed', 'trashed')->name('brands.trashed');
         Route::post('brands/restore/{id}', 'restore')->name('brands.restore');
@@ -51,6 +52,10 @@ Route::prefix('admin')->group(function() {
     Route::get('categories/create', CreateCategory::class)->name('categories.create');
     Route::get('categories/{category}/edit', EditCategory::class)->name('categories.edit');
     Route::resource('brands', BrandController::class);
+
+    Route::get('products', ProductList::class)->name('products.index');
+    Route::get('products/create', CreateProduct::class)->name('products.create');
+    Route::get('products/{product}/edit', UpdateProduct::class)->name('products.edit');
 });
 
 Route::middleware([

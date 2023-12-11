@@ -15,8 +15,9 @@ abstract class Table extends Component
 
     public abstract function query():Builder;
     public abstract function columns():array;
+    public abstract function deleteItem(int $id);
 
-    public function data() 
+    public function data()
     {
         return $this
         ->query()
