@@ -9,18 +9,38 @@ use App\Models\Product;
 
 class ProductTable extends Table
 {
+    public string $searchQuery = '';
+
+
 
     public $route_edit = 'products.edit';
 
     public function query():Builder
     {
-        return Product::query();
+        return Product::with('category')
+        ->when($this->searchQuery !== '', fn(Builder $query) => $query->where('name', 'like', '%'.$this->searchQuery.'%'));
+    }
+
+    public function updated($key):void
+    {
+        if ($key === 'searchQuery') {
+            $this->resetPage();
+        }
     }
 
     public function deleteItem(int $id)
     {
         $product = Product::find($id);
         $product->delete();
+    }
+
+    public  function restoreItem(int $id)
+    {
+        Product::withTrashed()->where('id', $id)->restore();
+    }
+    public  function forceDeleteItem(int $id)
+    {
+        Product::withTrashed()->find($id)->forceDelete();
     }
 
     public function columns():array
@@ -33,8 +53,5 @@ class ProductTable extends Table
         ];
 
     }
-    // public function render()
-    // {
-    //     return view('livewire.admin.products.product-table');
-    // }
+
 }
