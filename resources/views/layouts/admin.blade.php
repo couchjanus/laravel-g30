@@ -7,10 +7,19 @@
        <meta name="csrf-token" content="{{ csrf_token() }}">
        <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
        <style> @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"); </style>
-       
-       <tallstackui:script /> 
+
+       <tallstackui:script />
        <tallstackui:style />
-       
+       @rappasoftTableStyles
+
+        <!-- Adds any relevant Third-Party Styles (Used for DateRangeFilter (Flatpickr) and NumberRangeFilter) -->
+        @rappasoftTableThirdPartyStyles
+
+        <!-- Ads the Core Table Scripts -->
+        @rappasoftTableScripts
+
+        <!-- Adds any relevant Third-Party Scripts (e.g. Flatpickr) -->
+        @rappasoftTableThirdPartyScripts
        @vite(['resources/css/app.css', 'resources/js/app.js'])
        @livewireStyles
    </head>

@@ -7,29 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Post extends Model
+class Tag extends Model
 {
     use HasFactory;
     use Sluggable;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'content', 'user_id',  'status', 'cover'];
+    protected $fillable = ['name'];
 
     public function sluggable(): array {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }
 
-    public function user()
+    public function posts()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Post::class);
     }
 }
