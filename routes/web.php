@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('index');
-})->name('home');
+// Route::get('/home', function () {
+//     return view('index');
+// })->name('home');
 
 
 // Route::get('/home', 'App\Http\Controllers\HomeController@index');
@@ -27,14 +27,18 @@ Route::get('/home', function () {
 
 Route::get('about', App\Http\Controllers\AboutController::class)->name('about');
 
-use App\Http\Controllers\PostController;
+use App\Livewire\Main\{HomePage, BlogPage, BlogShow};
 
-Route::controller(PostController::class)->group(function() {
-    Route::get('blog', 'index')->name('blog');
-    Route::get('blog/{id}', 'show');
-});
+Route::get('/', HomePage::class)->name('home');
+Route::get('/blog', BlogPage::class)->name('blog');
+Route::get('/blog/showe/{slug}', BlogShow::class)->name('blog.detail');
 
+// use App\Http\Controllers\PostController;
 
+// Route::controller(PostController::class)->group(function() {
+//     Route::get('blog', 'index')->name('blog');
+//     Route::get('blog/{id}', 'show');
+// });
 
 use App\Http\Controllers\Admin\{DashboardController, BrandController};
 use App\Livewire\Admin\Categories\{CategoryList, CreateCategory, EditCategory};

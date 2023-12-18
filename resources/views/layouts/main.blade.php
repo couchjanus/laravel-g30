@@ -38,9 +38,9 @@
             </main>
 
             @if (isset($footer))
-                <footer>
+
                     {{ $footer }}
-                </footer>
+
             @endif
         </div>
 
