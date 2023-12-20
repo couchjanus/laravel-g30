@@ -33,6 +33,16 @@ Route::get('/', HomePage::class)->name('home');
 Route::get('/blog', BlogPage::class)->name('blog');
 Route::get('/blog/showe/{slug}', BlogShow::class)->name('blog.detail');
 
+use App\Livewire\Main\{Catalog, ShoppingCart};
+Route::get('/shop', Catalog::class)->name('shop');
+Route::get('/shopping-cart', ShoppingCart::class)->name('shopping.cart');
+
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified',])->group(function () {
+    Route::get('/checkout', [App\Http\Controllers\OrderController::class,'checkout'])->name('checkout.index');
+ });
+
+
 // use App\Http\Controllers\PostController;
 
 // Route::controller(PostController::class)->group(function() {

@@ -12,7 +12,8 @@ use BenSampo\Enum\Enum;
 final class ProductStatus extends Enum
 {
     const Pending = 0;
-    const Fresh = 1;
+    const Active = 1;
     const Sale = 2;
     const Sold = 3;
+    const Fresh = 4;
 }
