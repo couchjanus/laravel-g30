@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4af0c0d74edf592b2c8a713c39c36f88",
+    "content-hash": "90fa7aaf9c4c967cf03002eb5e2bc2e8",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -6978,29 +6978,29 @@
         },
         {
             "name": "tallstackui/tallstackui",
-            "version": "v1.0.0",
+            "version": "v1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tallstackui/tallstackui.git",
-                "reference": "647ab0de77eaf18a911481eff526970e9f307166"
+                "reference": "db907628a2fe8e3db9ed203e4a59dba3228a62a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tallstackui/tallstackui/zipball/647ab0de77eaf18a911481eff526970e9f307166",
-                "reference": "647ab0de77eaf18a911481eff526970e9f307166",
+                "url": "https://api.github.com/repos/tallstackui/tallstackui/zipball/db907628a2fe8e3db9ed203e4a59dba3228a62a6",
+                "reference": "db907628a2fe8e3db9ed203e4a59dba3228a62a6",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "^10.0",
                 "livewire/livewire": "^3.0",
-                "php": "^8.1|^8.2"
+                "php": "^8.1"
             },
             "require-dev": {
+                "larastan/larastan": "^2.7",
                 "laravel/pint": "^1.13",
-                "nunomaduro/larastan": "^2.0",
                 "orchestra/testbench": "^8.12",
                 "orchestra/testbench-dusk": "^8.12",
-                "pestphp/pest": "^2.17",
+                "pestphp/pest": "^2.0",
                 "pestphp/pest-plugin-type-coverage": "^2.2"
             },
             "type": "library",
@@ -7033,9 +7033,15 @@
             "description": "A curated list of TallStack UI Components",
             "support": {
                 "issues": "https://github.com/tallstackui/tallstackui/issues",
-                "source": "https://github.com/tallstackui/tallstackui/tree/v1.0.0"
+                "source": "https://github.com/tallstackui/tallstackui/tree/v1.5.2"
             },
-            "time": "2023-11-29T01:21:53+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/devajmeireles",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-12-20T04:37:45+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

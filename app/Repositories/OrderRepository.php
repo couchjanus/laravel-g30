@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use Cart;
-use App\Models\{Order, Product, OrderItem};
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderItem;
 use App\Contracts\OrderContract;
 
 class OrderRepository extends BaseRepository implements OrderContract
@@ -19,8 +21,8 @@ class OrderRepository extends BaseRepository implements OrderContract
         'order_number'      =>  'ORD-'.strtoupper(uniqid()),
         'user_id'           => auth()->user()->id,
         'status'            =>  'pending',
-        'grand_total'       =>  Cart::getSubTotal(),
-        'item_count'        =>  Cart::getTotalQuantity(),
+        'grand_total'       =>  \Cart::getSubTotal(),
+        'item_count'        =>  \Cart::getTotalQuantity(),
         'payment_status'    =>  0,
         'payment_method'    =>  null,
         'first_name'        =>  $params['first_name'],
@@ -31,31 +33,31 @@ class OrderRepository extends BaseRepository implements OrderContract
         'post_code'         =>  $params['post_code'],
         'phone_number'      =>  $params['phone_number'],
         'notes'             =>  $params['notes']
-    ]);
-    if ($order) {
-        $items = Cart::getContent();
-        foreach ($items as $item) {
-            $product = Product::where('name', $item->name)->first();
+        ]);
+        if ($order) {
+            $items = \Cart::getContent();
 
-            $orderItem = new OrderItem([
-                'product_id'    =>  $product->id,
-                'quantity'      =>  $item->quantity,
-                'price'         =>  $item->getPriceSum()
-            ]);
-            $order->items()->save($orderItem);
+            foreach ($items as $item) {
+                $product = Product::where('name', $item->name)->first();
+
+                $orderItem = new OrderItem([
+                    'product_id'    =>  $product->id,
+                    'quantity'      =>  $item->quantity,
+                    'price'         =>  $item->getPriceSum()
+                ]);
+                $order->items()->save($orderItem);
+            }
         }
-    }
-    return $order;
-    }
+        return $order;
+        }
 
+        public function listOrders(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
+        {
+            return $this->all($columns, $order, $sort);
+        }
 
-    public function listOrders(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
-    {
-        return $this->all($columns, $order, $sort);
-    }
-
-    public function findOrderByNumber($orderNumber)
-    {
-        return Order::where('order_number', $orderNumber)->first();
-    }
+        public function findOrderByNumber($orderNumber)
+        {
+            return Order::where('order_number', $orderNumber)->first();
+        }
 }

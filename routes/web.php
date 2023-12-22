@@ -38,10 +38,14 @@ Route::get('/shop', Catalog::class)->name('shop');
 Route::get('/shopping-cart', ShoppingCart::class)->name('shopping.cart');
 
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified',])->group(function () {
-    Route::get('/checkout', [App\Http\Controllers\OrderController::class,'checkout'])->name('checkout.index');
- });
-
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout.index');
+    Route::post('/checkout/order', [App\Http\Controllers\OrderController::class, 'placeOrder'])->name('checkout.place.order');
+});
 
 // use App\Http\Controllers\PostController;
 
@@ -54,6 +58,7 @@ use App\Http\Controllers\Admin\{DashboardController, BrandController};
 use App\Livewire\Admin\Categories\{CategoryList, CreateCategory, EditCategory};
 use App\Livewire\Admin\Products\{ProductList, CreateProduct, UpdateProduct};
 use App\Livewire\Admin\Posts\{PostList, CreatePost};
+use App\Livewire\Admin\Tags\{TagList, CreateTag, EditTag};
 
 Route::prefix('admin')->group(function() {
     Route::get('', DashboardController::class)->name('admin');
@@ -74,6 +79,8 @@ Route::prefix('admin')->group(function() {
 
     Route::get('posts', PostList::class)->name('posts.index');
     Route::get('posts/create', CreatePost::class)->name('posts.create');
+    Route::get('tags', TagList::class);
+    Route::get('tags/{tag}/edit', EditTag::class)->name('tags.edit');
 });
 
 Route::middleware([

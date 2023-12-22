@@ -1,15 +1,16 @@
 <?php
-
 namespace App\Repositories;
 
 use App\Contracts\BaseContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class BaseRepository implements BaseContract {
+class BaseRepository implements BaseContract
+{
     protected $model;
 
-    public function __construct(Model $model)  {
+    public function __construct(Model $model)
+    {
         $this->model = $model;
     }
 
@@ -28,7 +29,8 @@ class BaseRepository implements BaseContract {
     public function update(array $attributes, int $id) : bool     {
         return $this->find($id)->update($attributes);
     }
-    /**
+
+        /**
      * @param array $columns
      * @param string $orderBy
      * @param string $sortBy
@@ -42,6 +44,7 @@ class BaseRepository implements BaseContract {
     public function find(int $id)     {
         return $this->model->find($id);
     }
+
     public function findOneOrFail(int $id)     {
         return $this->model->findOrFail($id);
     }
