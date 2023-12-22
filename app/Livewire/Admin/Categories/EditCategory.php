@@ -3,8 +3,8 @@
 namespace App\Livewire\Admin\Categories;
 
 use Livewire\Component;
-use Livewire\Attributes\{Layout, Title};
-
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use App\Livewire\Forms\Admin\CategoryForm;
 use Livewire\WithFileUploads;
 use App\Models\Category;
@@ -13,17 +13,18 @@ use App\Models\Category;
 class EditCategory extends Component
 {
     use WithFileUploads;
-    
+
     public CategoryForm $form;
 
-    public function mount(Category $category) 
+    public function mount(Category $category)
     {
         $this->form->setCategory($category);
     }
 
-    public function save() 
+    public function save()
     {
         $this->form->update();
+
         return $this->redirect('/admin/categories');
     }
 

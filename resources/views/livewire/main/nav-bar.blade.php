@@ -15,50 +15,62 @@
                     <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
+                        {{ __('Blog') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('shop') }}" :active="request()->routeIs('shop')">
                         {{ __('Catalog') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
-                        {{ __('Blog') }}
-                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">
                         {{ __('About') }}
                     </x-nav-link>
-
-
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">
+                        {{ __('Contact') }}
+                    </x-nav-link>
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                 @if (Route::has('login'))
+                
+              @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
                         <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                            {{ __('Dashboard') }}
                         </x-nav-link>
+                        
                     @else
                         <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
-                        {{ __('Log in') }}
+                            {{ __('Log in') }}
                         </x-nav-link>
-
+                        
 
                         @if (Route::has('register'))
-                            <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
-                            {{ __('Register') }}
-                            </x-nav-link>
 
+                            <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                                {{ __('Register') }}
+                            </x-nav-link>
+                            
                         @endif
                     @endauth
                     <x-nav-link href="{{ route('shopping.cart') }}" :active="request()->routeIs('shopping.cart')" wire:navigate>
-                            @livewire('main.cart-counter')
+                    @livewire('main.cart-counter')
                     </x-nav-link>
-
+                    
                 </div>
-            @endif
+              @endif
 
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
-                    @auth
+                  @auth
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -107,7 +119,7 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
-                    @endauth
+                  @endauth
                 </div>
             </div>
 
@@ -133,7 +145,7 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            @auth
+          @auth
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 me-3">
@@ -169,9 +181,9 @@
                     </x-responsive-nav-link>
                 </form>
 
-
+                
             </div>
-            @endauth
+          @endauth
         </div>
     </div>
 </nav>

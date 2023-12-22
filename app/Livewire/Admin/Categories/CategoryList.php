@@ -3,11 +3,12 @@
 namespace App\Livewire\Admin\Categories;
 
 use Livewire\Component;
-use Livewire\Attributes\{Layout, Title};
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
-#[Title('Categories List')]
 class CategoryList extends Component
 {
+    #[Title('Categories List')]
     #[Layout('layouts.admin')]
     public function render()
     {

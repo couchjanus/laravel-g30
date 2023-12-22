@@ -11,7 +11,7 @@
         'bg-blue-500' => $value === 3,
         'bg-red-500' => $value === 4,
         'bg-beige-500' => $value === 5,
-    ])>
-    {{ $value }}
+])>
+        {{ $value }}
     </div>
 </div>

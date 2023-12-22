@@ -1,3 +1,3 @@
 <div>
-    {{-- Do your work, then step back. --}}
+    {{-- The Master doesn't talk, he acts. --}}
 </div>

@@ -3,13 +3,15 @@
 namespace App\Livewire\Main;
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
-use Livewire\Attributes\{Computed, Layout, Title};
 use App\Models\Product;
 use App\Enums\ProductStatus;
 
-use Illuminate\Support\Collection;
 use Livewire\WithPagination;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
 
 #[Title('Catalog page')]
 #[Layout('layouts.main')]
@@ -19,7 +21,7 @@ class Catalog extends Component
 
     public Collection $products;
 
-    public int $perPage = 6;
+    public $perPage = 6;
     public int $page = 1;
 
     public array $quantity = [];
@@ -29,10 +31,9 @@ class Catalog extends Component
     public function mount()
     {
         $this->products = collect();
-        foreach ($this->products as $product) {
+        foreach ($this->products as $product){
             $this->quantity[$product->id] = 1;
         }
-
         $this->loadMore();
     }
 
@@ -41,14 +42,14 @@ class Catalog extends Component
         $this->products->push(
             ...$this->paginator->getCollection()
         );
-        $this->page += 1;
+
+        $this->page = $this->page + 1;
     }
 
     #[Computed()]
     public function paginator()
     {
-        return Product::where('status', ProductStatus::Active)
-        ->with('category')->latest('updated_at')->paginate($this->perPage, ['*'], 'page', $this->page);
+        return Product::where('status', ProductStatus::Active)->with('category')->latest('updated_at')->paginate($this->perPage, ['*'], 'page', $this->page);
     }
 
     public function addToCart($id) {
@@ -62,9 +63,10 @@ class Catalog extends Component
                 'image' => $this->product->cover,
             ]
             ]);
-
+            
             $this->dispatch('refresh');
     }
+
 
     public function render()
     {

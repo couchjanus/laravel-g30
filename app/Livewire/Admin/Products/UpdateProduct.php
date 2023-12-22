@@ -3,7 +3,8 @@
 namespace App\Livewire\Admin\Products;
 
 use Livewire\Component;
-use Livewire\Attributes\{Layout, Title};
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use App\Livewire\Forms\Admin\ProductForm;
 use Livewire\WithFileUploads;
 use App\Models\{Product, Category, Brand};
@@ -19,7 +20,7 @@ class UpdateProduct extends Component
     public Array $brands;
     public Array $productStatus;
 
-    public function mount(Product $product): void
+    public function mount(Product $product)
     {
         $this->form->setProduct($product);
         $this->categories = Category::all('id', 'name')->toArray();
@@ -27,10 +28,10 @@ class UpdateProduct extends Component
         $this->productStatus = ProductStatus::asArray();
     }
 
-
     public function save()
     {
         $this->form->update();
+
         return $this->redirect('/admin/products');
     }
 

@@ -6,7 +6,7 @@
             <i class="fas fa-plus mr-3"></i> New Report
         </button>
     </div>
-
+    
     <nav class="text-white text-base font-semibold pt-3">
         <a href="/admin" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
             <i class="fas fa-tachometer-alt mr-3"></i>
@@ -25,14 +25,14 @@
             <i class="fas fa-table mr-3"></i>
                 Brands
         </a>
-       
+        
 
-        @can('user-list')
-        <a href="/users" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        
+        <a href="/admin/users" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fas fa-table mr-3"></i>
                 Users
         </a>
-        @endcan
+        
         <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fas fa-align-left mr-3"></i>
                 Forms
@@ -46,5 +46,5 @@
                 Calendar
         </a>
     </nav>
-
+    
 </aside>

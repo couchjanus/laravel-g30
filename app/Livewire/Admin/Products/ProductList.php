@@ -3,12 +3,13 @@
 namespace App\Livewire\Admin\Products;
 
 use Livewire\Component;
-use Livewire\Attributes\{Layout, Title};
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
-#[Title('Product List')]
+#[Title('Products List')]
+#[Layout('layouts.admin')]
 class ProductList extends Component
 {
-    #[Layout('layouts.admin')]
     public function render()
     {
         return view('livewire.admin.products.product-list');

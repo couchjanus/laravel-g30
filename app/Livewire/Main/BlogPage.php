@@ -4,53 +4,83 @@ namespace App\Livewire\Main;
 
 use Livewire\Component;
 use Livewire\Attributes\{Layout, Title};
-use App\Models\Post;
+// use Livewire\Attributes\Title;
+use App\Models\{Post, Tag};
 use App\Enums\PostStatus;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 use Livewire\WithPagination;
+// use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
+use Illuminate\Database\Eloquent\Builder;
+
+use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 
 #[Title('Blog page')]
 #[Layout('layouts.main')]
 class BlogPage extends Component
 {
     use WithPagination;
-    public Collection $posts;
 
-    public int $page = 1;
-    public $hasMore;
+    #[Url()]
+    public $sort = 'desc';
 
-    public $sortDirection = 'desc';
+    #[Url()]
+    public $search = '';
 
-    public function query(): Builder
+    #[Url()]
+    public $tag = '';
+
+    #[Url()]
+    public $popular = false;
+
+    public function setSort($sort)
     {
-        return Post::where('status', PostStatus::Active)
-        ->with('user')
-        ->with('tags')
-        ->when($this->sortDirection == 'desc', function($query){
-            $query->latest();
-        })
-        ;
+        $this->sort = ($sort === 'desc') ? 'desc' : 'asc';
     }
 
-    public function mount()
+    #[On('search')]
+    public function updateSearch($search)
     {
-
+        $this->search = $search;
+        $this->resetPage();
     }
 
-    public function LoadMore()
+    public function clearFilters()
     {
-        $posts = $this->query()->paginate(7, ['*'], 'page', $this->page);
-        $this->page +=1;
-        $this->hasMore = $posts->hasMorePages();
-        $this->posts->push(...$posts->items());
-
+        $this->search = '';
+        $this->tag = '';
+        $this->resetPage();
     }
+
+    #[Computed()]
+    public function posts()
+    {
+        return Post::published()
+            ->with('author', 'tags')
+            ->when($this->activeTag, function ($query) {
+                $query->withTag($this->tag);
+            })
+            ->when($this->popular, function ($query) {
+                $query->popular();
+            })
+            ->search($this->search)
+            ->orderBy('published_at', $this->sort)
+            ->paginate(3);
+    }
+
+    #[Computed()]
+    public function activeTag()
+    {
+        if ($this->tag === null || $this->tag === '') {
+            return null;
+        }
+
+        return Tag::where('slug', $this->tag)->first();
+    }
+
 
     public function render()
     {
-        $this->posts = new Collection();
-        $this->LoadMore();
         return view('livewire.main.blog-page');
     }
 }

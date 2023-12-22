@@ -3,5 +3,5 @@
 ])
 
 <div>
-{{ \Carbon\Carbon::make($value)->diffForHumans() }}
+    {{ \Carbon\Carbon::make($value)->diffForHumans() }}
 </div>

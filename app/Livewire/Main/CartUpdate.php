@@ -9,7 +9,8 @@ class CartUpdate extends Component
     public $cartItems = [];
     public $quantity = 1;
 
-    public function mount($item)   {
+    public function mount($item)
+    {
         $this->cartItems = $item;
         $this->quantity = $item['quantity'];
     }
@@ -25,7 +26,6 @@ class CartUpdate extends Component
 
         $this->dispatch('cartUpdated');
     }
-
 
     public function render()
     {
